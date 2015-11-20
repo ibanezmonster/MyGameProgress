@@ -12,22 +12,15 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:id="@+id/linearLayout"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:layout_alignParentEnd="true">
 
         <ListView
             android:layout_width="match_parent"
-            android:layout_height="401dp"
+            android:layout_height="421dp"
             android:id="@+id/gamesListView"
-            android:smoothScrollbar="false"
-            android:layout_weight="0.17" />
+            android:smoothScrollbar="false" />
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.17">
-
-        </LinearLayout>
     </LinearLayout>
 
     <Button

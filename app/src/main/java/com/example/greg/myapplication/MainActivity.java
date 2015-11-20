@@ -2,7 +2,9 @@ package com.example.greg.myapplication;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -11,12 +13,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 public class MainActivity extends Activity {
-    private ArrayList<Game> gameList;
+    private static ArrayList<Game> gameListGames;
     private ArrayList<Button> gameListButtons;
+    private Button btnGame;
+    private Context context;
+    private ArrayList<String> list = new ArrayList<String>();
+    private MainActivity mainActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,24 +32,29 @@ public class MainActivity extends Activity {
         Log.d("Starting", "...");
 
         MyGameProgress app = (MyGameProgress) getApplication();
-        gameList = app.getAllGames();
+        gameListGames = app.getAllGames();
         Log.d("Game list", "Got game list");
 
-        gameList = new ArrayList<>();
+        gameListGames = new ArrayList<>();
         gameListButtons = new ArrayList<>();
 
-        Game defaultGame = new Game("Default");
-        gameList.add(defaultGame);
-
         //if no entries in game list, display a message stating that entries need to be added
+//        if(gameListGames.isEmpty()){
+//            ListView gamesListView = (ListView) findViewById(R.id.gamesListView);
+//            gamesListView.setVisibility(View.INVISIBLE);
+//
+//            TextView noEntries = new TextView(this);
+//            noEntries.setText("No entries");
+//            gamesListView.addView(noEntries);
+//        }
 
         //if there are entries, generate list
-        generateList(false);
-
-        //list.add("item1");
-        //list.add("item2");
+        //else {
+            displayList();
+        //}
 
         //set button onClick Listener
+        setContentView(R.layout.game_list_layout);
         Button addBtn = (Button) findViewById(R.id.addBtn);
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,8 +96,7 @@ public class MainActivity extends Activity {
                 .setPositiveButton("Add", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichbutton) {
                         String gameName = input.getText().toString();
-                        gameList.add(new Game(gameName));
-                        generateList(true);
+                        addToGameList(gameName);
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -96,28 +107,31 @@ public class MainActivity extends Activity {
                 .show();
         }
 
+        public void addToGameList(String gameName){
+            gameListGames.add(new Game(gameName));
 
-        public void generateList(boolean addGame){
-            ArrayList<String> list = new ArrayList<String>();
-
-            if(addGame){
-                list.add(gameList.get(gameList.size() - 1).getName());
+            if(gameListGames.isEmpty()){
+                list.add(gameListGames.get(0).getName());
+            } else {
+                list.add(gameListGames.get(gameListGames.size() - 1).getName());
             }
 
-            else {
-                for (int i = 0; i < gameList.size(); i++) {
-                    list.add(gameList.get(i).getName());
-                }
-            }
-//            for (int i = 0; i < gameList.size(); i++) {
-//                list.add(gameList.get(i).getName());
-//            }
+            displayList();
+        }
 
+        public void displayList(){
             //instantiate custom adapter
             GameArrayAdapter adapter = new GameArrayAdapter(list, this);
 
             //handle listview and assign adapter
             ListView lView = (ListView)findViewById(R.id.gamesListView);
+
             lView.setAdapter(adapter);
         }
+
+
+    public static ArrayList<Game> getGameList() {
+        return gameListGames;
     }
+}
+

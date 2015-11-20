@@ -1,8 +1,10 @@
 package com.example.greg.myapplication;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import android.widget.Button;
 import android.widget.ListAdapter;
 
 import java.util.ArrayList;
+import com.example.greg.myapplication.MainActivity;
 
 /**
  * Created by Greg on 11/11/2015.
@@ -43,6 +46,7 @@ public class GameArrayAdapter extends BaseAdapter implements ListAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         View view = convertView;
+
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.dynamic_game_list_layout, null);
@@ -52,19 +56,15 @@ public class GameArrayAdapter extends BaseAdapter implements ListAdapter {
         Button gameInfoBtn = (Button)view.findViewById(R.id.gameInfoBtn);
         Button deleteBtn = (Button)view.findViewById(R.id.deleteBtn);
 
-        deleteBtn.setOnClickListener(new View.OnClickListener(){
+        gameInfoBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                //confirm delete
-
-
-                //do something
-                list.remove(position); //or some other task
-                notifyDataSetChanged();
+                Intent intent = new Intent(context, GameInfoActivity.class);
+                v.getContext().startActivity(intent);
             }
         });
 
-        deleteBtn.setOnClickListener(new View.OnClickListener(){
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //confirm delete
@@ -75,6 +75,7 @@ public class GameArrayAdapter extends BaseAdapter implements ListAdapter {
                             public void onClick(DialogInterface dialog, int which) {
                                 // continue with delete
                                 list.remove(position);
+                                MainActivity.getGameList().remove(position);
                                 notifyDataSetChanged();
                             }
                         })
@@ -88,7 +89,6 @@ public class GameArrayAdapter extends BaseAdapter implements ListAdapter {
             }
         });
 
-        return view;
-    }
-
+          return view;
+        }
     }
