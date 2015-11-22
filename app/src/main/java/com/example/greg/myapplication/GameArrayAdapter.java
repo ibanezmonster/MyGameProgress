@@ -54,6 +54,8 @@ public class GameArrayAdapter extends BaseAdapter implements ListAdapter {
 
         //Handle buttons and add onClickListeners
         Button gameInfoBtn = (Button)view.findViewById(R.id.gameInfoBtn);
+        // Add games name to button
+        gameInfoBtn.setText(list.get(position));
         Button deleteBtn = (Button)view.findViewById(R.id.deleteBtn);
 
         gameInfoBtn.setOnClickListener(new View.OnClickListener(){
