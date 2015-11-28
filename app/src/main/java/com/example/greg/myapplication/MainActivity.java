@@ -19,10 +19,9 @@ import java.util.ArrayList;
 
 public class MainActivity extends Activity {
     private static ArrayList<Game> gameListGames;
-    private ArrayList<Button> gameListButtons;
     private Button btnGame;
     private Context context;
-    private ArrayList<String> list = new ArrayList<String>();
+    private ArrayList<String> list;
     private MainActivity mainActivity;
 
     @Override
@@ -35,8 +34,8 @@ public class MainActivity extends Activity {
         gameListGames = app.getAllGames();
         Log.d("Game list", "Got game list");
 
+        list = new ArrayList<String>();
         gameListGames = new ArrayList<>();
-        gameListButtons = new ArrayList<>();
 
         //if no entries in game list, display a message stating that entries need to be added
 //        if(gameListGames.isEmpty()){
@@ -64,28 +63,6 @@ public class MainActivity extends Activity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     public void newGameClickHandler(){
         final EditText input = new EditText(this);
 
@@ -105,29 +82,22 @@ public class MainActivity extends Activity {
                     }
                 })
                 .show();
-        }
+    }
 
-        public void addToGameList(String gameName){
-            gameListGames.add(new Game(gameName));
+    public void addToGameList(String gameName){
+        gameListGames.add(new Game(gameName));
+        list.add(gameListGames.get(gameListGames.size() - 1).getName());
+        displayList();
+    }
 
-            if(gameListGames.isEmpty()){
-                list.add(gameListGames.get(0).getName());
-            } else {
-                list.add(gameListGames.get(gameListGames.size() - 1).getName());
-            }
+    public void displayList(){
+        //instantiate custom adapter
+        GameArrayAdapter adapter = new GameArrayAdapter(list, this);
 
-            displayList();
-        }
-
-        public void displayList(){
-            //instantiate custom adapter
-            GameArrayAdapter adapter = new GameArrayAdapter(list, this);
-
-            //handle listview and assign adapter
-            ListView lView = (ListView)findViewById(R.id.gamesListView);
-
-            lView.setAdapter(adapter);
-        }
+        //handle listview and assign adapter
+        ListView lView = (ListView)findViewById(R.id.gamesListView);
+        lView.setAdapter(adapter);
+    }
 
 
     public static ArrayList<Game> getGameList() {

@@ -21,6 +21,7 @@ import com.example.greg.myapplication.MainActivity;
 public class GameArrayAdapter extends BaseAdapter implements ListAdapter {
     private ArrayList<String> list = new ArrayList<String>();
     private Context context;
+    protected static String currentGameName;
 
     public GameArrayAdapter(ArrayList<String> list, Context context) {
         this.list = list;
@@ -54,13 +55,16 @@ public class GameArrayAdapter extends BaseAdapter implements ListAdapter {
 
         //Handle buttons and add onClickListeners
         Button gameInfoBtn = (Button)view.findViewById(R.id.gameInfoBtn);
+        Button deleteBtn = (Button)view.findViewById(R.id.deleteBtn);
+
         // Add games name to button
         gameInfoBtn.setText(list.get(position));
-        Button deleteBtn = (Button)view.findViewById(R.id.deleteBtn);
 
         gameInfoBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                //set the game name to the name of the button that was clicked and start the Game Info Activity
+                currentGameName = list.get(position);
                 Intent intent = new Intent(context, GameInfoActivity.class);
                 v.getContext().startActivity(intent);
             }
@@ -93,4 +97,4 @@ public class GameArrayAdapter extends BaseAdapter implements ListAdapter {
 
           return view;
         }
-    }
+}

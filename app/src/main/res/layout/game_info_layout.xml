@@ -30,13 +30,14 @@
             <ListView
                 android:layout_width="match_parent"
                 android:layout_height="386dp"
-                android:id="@+id/listView" />
+                android:id="@+id/gameInfoListView" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Add Character"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/addCharacterBtn" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

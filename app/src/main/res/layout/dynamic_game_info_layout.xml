@@ -6,20 +6,19 @@
     <Button
         android:layout_width="284dp"
         android:layout_height="wrap_content"
-        android:text="Game"
-        android:id="@+id/button"
+        android:text="Character"
+        android:id="@+id/characterBtn"
         android:layout_alignTop="@+id/deleteBtn"
         android:layout_toStartOf="@+id/deleteBtn"
-        android:layout_gravity="center_vertical"
         android:layout_weight="0.04" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/deleteCharacterBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="5dp"
-        android:text="Delete"
-        android:layout_gravity="center_vertical" />
+        android:text="Delete" />
+
 </LinearLayout>
