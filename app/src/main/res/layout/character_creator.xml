@@ -51,16 +51,14 @@
                 android:layout_height="wrap_content"
                 android:text="No"
                 android:id="@+id/characterLevelNoRadioButton"
-                android:checked="true" />
+                android:checked="false" />
 
             </RadioGroup>
 
         <EditText
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/levelEditText"
-            android:layout_gravity="center_horizontal"
-            android:editable="false" />
+            android:id="@+id/levelEditText" />
 
     </LinearLayout>
 
@@ -90,7 +88,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Job"
+            android:text="Job/Class/Profession"
             android:id="@+id/jobTextView" />
 
     </LinearLayout>

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -54,9 +55,18 @@ public class GameInfoArrayAdapter extends BaseAdapter implements ListAdapter {
         //Handle buttons and add onClickListeners
         Button characterBtn = (Button)view.findViewById(R.id.characterBtn);
         Button deleteCharacterBtn = (Button)view.findViewById(R.id.deleteCharacterBtn);
+        TextView characterInfoTextView = (TextView)view.findViewById(R.id.characterInfoTextView);
 
-        // Add games name to button
-        characterBtn.setText(list.get(position));
+        // Add character info to button and text view
+        //for(String pos : list) {
+            //display character name for button
+            String name = list.get(position);
+            name = name.substring(0, name.indexOf("\n"));
+            characterBtn.setText(name);
+
+            //display full character info for text view
+            characterInfoTextView.setText(list.get(position));
+        //}
 
         deleteCharacterBtn.setOnClickListener(new View.OnClickListener() {
             @Override

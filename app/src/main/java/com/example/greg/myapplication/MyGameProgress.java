@@ -21,9 +21,6 @@ public class MyGameProgress extends Application {
 
     public void addGame(Game game){
         assert game != null;
-
-        //ContentValues cv = new ContentValues();
-        //cv.put("name", "default");
     }
 
     public ArrayList<Game> getAllGames(){

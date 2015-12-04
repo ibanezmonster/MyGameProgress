@@ -1,5 +1,7 @@
 package com.example.greg.myapplication;
 
+import java.util.ArrayList;
+
 /**
  * Created by Greg on 11/27/2015.
  */
@@ -7,15 +9,17 @@ public class Character {
     private String name;
     private String race;
     private int characterLevel;
-    private String[] job;
-    private int[] jobLevel;
+    private ArrayList<String> job;
+    private ArrayList<Integer> jobLevel;
+    private String fullInfo;
 
-    public Character(String name, String race, int characterLevel, String[] job, int[] jobLevel) {
+    public Character(String name, String race, int characterLevel, ArrayList<String> job, ArrayList<Integer> jobLevel, String fullInfo) {
         this.name = name;
         this.race = race;
         this.characterLevel = characterLevel;
         this.job = job;
         this.jobLevel = jobLevel;
+        this.fullInfo = fullInfo;
     }
 
     public String getName() {
@@ -42,19 +46,27 @@ public class Character {
         this.characterLevel = characterLevel;
     }
 
-    public String[] getJob() {
+    public ArrayList<String> getJob() {
         return job;
     }
 
-    public void setJob(String[] job) {
+    public void setJob(ArrayList<String> job) {
         this.job = job;
     }
 
-    public int[] getJobLevel() {
+    public ArrayList<Integer> getJobLevel() {
         return jobLevel;
     }
 
-    public void setJobLevel(int[] jobLevel) {
+    public void setJobLevel(ArrayList<Integer> jobLevel) {
         this.jobLevel = jobLevel;
+    }
+
+    public String getFullInfo() {
+        return fullInfo;
+    }
+
+    public void setFullInfo(String fullInfo) {
+        this.fullInfo = fullInfo;
     }
 }
